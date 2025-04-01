@@ -11,6 +11,54 @@ Temos um cadastro de veículos onde precisaremos das seguintes informações: Pr
 
 Para um cadastro de um novo veículo, precisaremos passar apenas as seguintes informações: Proprietário, CPF e Placa. 
 
+{
+    id (Para o cadastro do veiculo), AUTOINCREMENT
+    CPF (Persona Proprietario), ÚNICO
+    Nome (Persona Proprietario),
+    Placa (Veiculo), ÚNICO
+    Chassi (Veiculo),
+    Marca (Veiculo),
+    Modelo (Veiculo),
+    Último Financiamento Pago
+
+}
+
+### Payload Cadastro Único de Proprietario e Veiculo
+
+{
+	"cpf": "70510706142",
+	"name": "Rafael Castilho Da Costa",
+	"plate": "KAX5703",
+	"chassis": "32423292007451433",
+	"mark": "BMW",
+	"model": "320iA 2.0 TB M Sport ActiveFlex 16V 4p",
+	"last_financing":"2025"
+}
+
+### Payload Cadastro de Proprietario
+
+{
+	"cpf": "70510706142",
+	"name": "Rafael Castilho Da Costa",
+	"plate": "null",
+	"chassis": "null",
+	"mark": "null",
+	"model": "null",
+	"last_financing":"null"
+}
+
+### Payload Cadastro Apenas do Veiculo
+
+{
+	"cpf": "null",
+	"name": "null",
+	"plate": "KAX5703",
+	"chassis": "32423292007451433",
+	"mark": "BMW",
+	"model": "320iA 2.0 TB M Sport ActiveFlex 16V 4p",
+	"last_financing":"2025"
+}
+
 ### Payload
 Faça uma proposta de payload, se preferir, temos um exemplo aqui:
 
