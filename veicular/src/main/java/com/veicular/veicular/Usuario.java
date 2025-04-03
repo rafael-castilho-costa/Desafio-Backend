@@ -1,5 +1,5 @@
 package com.veicular.veicular;
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 
 public class Usuario {
     

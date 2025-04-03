@@ -51,7 +51,7 @@ public class VeiculoController {
         }
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> excluir (@PathVariable Integer id) {
         try {
             service.excluirVeiculo(id);

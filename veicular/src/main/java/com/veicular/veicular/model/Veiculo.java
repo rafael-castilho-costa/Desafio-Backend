@@ -1,6 +1,7 @@
 package com.veicular.veicular.model;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,19 +24,26 @@ public class Veiculo {
     private Integer id;
 
     @NotBlank(message = "O nome do proprietário é obrigatorio")
+    @Column(nullable = false)
     private String proprietario;
 
     @NotBlank(message = "O CPF do proprietário é obrigatorio")
     @Pattern(regexp = "\\d{11}", message = "O CPF deve ter 11 dígitos")
+    @Column(nullable = false, unique = true, length = 11)
     private String cpf;
 
     @NotBlank(message = "A Placa é obrigatoria")
     @Pattern(regexp = "[A-Z]{3}[0-9]{4}", message = "Formato de placa inválida (ex: ABC8I23)")
+    @Column(nullable = false, unique = true , length = 7)
     private String placa;
 
+    @Column(nullable = false, unique = true)
     private String chassis;
+
     private String marca;
+    
     private String modelo;
-    @Pattern(regexp = "\\d{4}", message = "Insira apenas o ano")
-    private String ultimoLicenciamento;
+
+    
+    private Boolean ultimoLicenciamento;
 }
