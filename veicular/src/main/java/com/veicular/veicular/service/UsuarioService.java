@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.veicular.veicular.model.Usuario;
@@ -14,8 +15,8 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository repository;
-
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     //Cadastro
     public Usuario cadastrar(Usuario usuario) {
@@ -27,10 +28,18 @@ public class UsuarioService {
     }
 
     //Login
+
     public Usuario login(String email, String senha) {
-        Optional<Usuario> usuarioOpt = repository.findByEmail(email);
-        if (usuarioOpt.isPresent() && passwordEncoder.matches(senha, usuarioOpt.get().getSenha())) {
-            return usuarioOpt.get();
+        Optional<Usuario> usuarioOptional = repository.findByEmail(email);
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+           /* System.out.println("Senha digitada:" + senha);
+            System.out.println("Senha no banco:" + usuario.getSenha());
+            System.out.println("Senha bate?" + passwordEncoder.matches(senha, usuario.getSenha()));*/
+
+            if (passwordEncoder.matches(senha, usuario.getSenha())) {
+                return usuario;
+            }
         }
         throw new RuntimeException("Email ou senha inválidos.");
     }

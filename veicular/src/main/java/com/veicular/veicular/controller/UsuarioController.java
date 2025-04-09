@@ -3,18 +3,13 @@ package com.veicular.veicular.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.veicular.veicular.dto.LoginDTO;
 import com.veicular.veicular.dto.ResetSenhaDTO;
 import com.veicular.veicular.dto.UsuarioCadastroDTO;
 import com.veicular.veicular.model.Usuario;
 import com.veicular.veicular.service.UsuarioService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-
 
 
 @RestController
@@ -35,6 +30,7 @@ public class UsuarioController {
         Usuario usuario = new Usuario();
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
+        usuario.setRole(dto.getRole());
         usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
 
         Usuario novoUsuario = service.cadastrar(usuario);
@@ -53,6 +49,9 @@ public class UsuarioController {
         return ResponseEntity.ok("Senha Atualizada com Sucesso");
     }
     
-    
+    @GetMapping("/teste-publico")
+    public ResponseEntity<String>testePublico(){
+        return ResponseEntity.ok("Acesso Publico");
+    }
     
 }

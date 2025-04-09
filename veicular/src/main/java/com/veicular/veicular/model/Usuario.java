@@ -29,5 +29,11 @@ public class Usuario {
 
     @NotBlank
     private String nome;
+
+    private String role;
+
+    public String getRole(){
+       return role;
+    }
     
 }

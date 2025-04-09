@@ -14,7 +14,10 @@ import org.springframework.web.client.RestTemplate;
 public class VeicularApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(VeicularApplication.class, args);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		System.out.println(encoder.encode("123456"));
 	}
 
 	@Bean
@@ -22,8 +25,5 @@ public class VeicularApplication {
 		return new RestTemplate();
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+
 }
