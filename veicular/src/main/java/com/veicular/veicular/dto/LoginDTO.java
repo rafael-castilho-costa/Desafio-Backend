@@ -1,5 +1,6 @@
 package com.veicular.veicular.dto;
 
+
 import lombok.Data;
 
 @Data

@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.http.HttpMethod;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
@@ -37,7 +39,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
+            .cors(Customizer.withDefaults())
             .authorizeHttpRequests(auth -> auth
+            .requestMatchers(HttpMethod.OPTIONS,"/veicular").permitAll()
+            .requestMatchers(HttpMethod.POST, "/veicular").permitAll()
+            .requestMatchers(HttpMethod.GET, "/veicular").permitAll()
             .requestMatchers("/usuarios/login", "/usuarios/cadastrar", "/usuarios/resetar-senha", "/usuarios/teste-publico").permitAll()
             .anyRequest().authenticated()
             )

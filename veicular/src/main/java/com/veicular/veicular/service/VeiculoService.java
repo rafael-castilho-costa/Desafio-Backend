@@ -24,7 +24,7 @@ public class VeiculoService {
 
  
     @Autowired
-      public RestTemplate restTemplate;
+    public RestTemplate restTemplate;
 
     public List<Veiculo> listarTodos() {
         return repository.findAll();

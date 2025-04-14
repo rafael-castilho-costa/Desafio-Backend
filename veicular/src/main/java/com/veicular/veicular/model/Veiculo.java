@@ -23,7 +23,7 @@ public class Veiculo {
     @Id
     private Integer id;
 
-    @NotBlank(message = "O nome do proprietário é obrigatorio")
+    //@NotBlank(message = "O nome do proprietário é obrigatorio")
     @Column(nullable = false)
     private String proprietario;
 
@@ -45,5 +45,5 @@ public class Veiculo {
     private String modelo;
 
     
-    private Boolean ultimoLicenciamento;
+    //private Boolean ultimoLicenciamento;
 }

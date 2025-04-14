@@ -1,5 +1,6 @@
 package com.veicular.veicular.controller;
 
+import com.veicular.veicular.dto.UsuarioResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,7 +41,15 @@ public class UsuarioController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO dto) {
         Usuario usuario = service.login(dto.getEmail(), dto.getSenha());
-        return ResponseEntity.ok(usuario);
+
+        UsuarioResponseDTO responseDTO = new UsuarioResponseDTO(
+                usuario.getId().longValue(),
+                usuario.getNome(),
+                usuario.getEmail(),
+                usuario.getRole()
+        );
+        return ResponseEntity.ok(responseDTO);
+
     }
 
     @PutMapping("/resetar-senha")

@@ -1,5 +1,6 @@
 package com.veicular.veicular.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class VeiculoController {
     private VeiculoService service;
 
     @PostMapping
-    public ResponseEntity<?> cadastrar(@Valid @RequestBody Veiculo veiculo) {
+    public ResponseEntity<?>cadastrar(@Valid @RequestBody Veiculo veiculo) {
         try {
             Veiculo novoVeiculo = service.cadastrarVeiculo(veiculo);
             return ResponseEntity.ok(novoVeiculo);
@@ -36,18 +37,31 @@ public class VeiculoController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<?>buscarPorId(@PathVariable Integer id) {
         Optional<Veiculo> veiculo = service.buscarPorId(id);
         return veiculo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Integer id, @Valid @RequestBody Veiculo veiculo) {
+    public ResponseEntity<?>atualizar(@PathVariable Integer id, @Valid @RequestBody Veiculo veiculo) {
         try {
             Veiculo atualizado = service.atualizarVeiculo (id, veiculo);
             return ResponseEntity.ok(atualizado);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> listarTodos() {
+        try {
+            List<Veiculo> veiculos = service.listarTodos();
+            if (veiculos.isEmpty()) {
+                return ResponseEntity.noContent().build(); //HTTP 204
+            }
+            return ResponseEntity.ok(veiculos); // HTTP 200
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro ao listar veículos:" + e.getMessage()); //HTTP 500
         }
     }
 
