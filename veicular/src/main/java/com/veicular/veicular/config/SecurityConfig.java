@@ -43,7 +43,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
             .requestMatchers(HttpMethod.OPTIONS,"/veicular").permitAll()
             .requestMatchers(HttpMethod.POST, "/veicular").permitAll()
+            .requestMatchers(HttpMethod.DELETE, "/veicular").permitAll()
             .requestMatchers(HttpMethod.GET, "/veicular").permitAll()
+            .requestMatchers("/veicular/**").permitAll()
             .requestMatchers("/usuarios/login", "/usuarios/cadastrar", "/usuarios/resetar-senha", "/usuarios/teste-publico").permitAll()
             .anyRequest().authenticated()
             )
